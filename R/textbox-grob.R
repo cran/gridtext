@@ -172,6 +172,8 @@ textbox_grob <- function(text, x = NULL, y = NULL,
 
   # make sure we can handle input text even if provided as factor
   text <- as.character(text)
+  # convert NAs to empty strings
+  text <- ifelse(is.na(text), "", text)
 
   # determine orientation and adjust accordingly
   orientation <- match.arg(orientation)
@@ -236,7 +238,7 @@ textbox_grob <- function(text, x = NULL, y = NULL,
   if (use_markdown) {
     text <- markdown::markdownToHTML(text = text, options = c("use_xhtml", "fragment_only"))
   }
-  doctree <- read_html(text)
+  doctree <- read_html(paste0("<!DOCTYPE html>", text))
 
   # if width is set to NULL, we use the native size policy and turn off word wrap
   if (is.null(width)) {

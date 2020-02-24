@@ -98,6 +98,8 @@ richtext_grob <- function(text, x = unit(0.5, "npc"), y = unit(0.5, "npc"),
 
   # make sure we can handle input text even if provided as factor
   text <- as.character(text)
+  # convert NAs to empty strings
+  text <- ifelse(is.na(text), "", text)
 
   # make sure margin and padding are of length 4
   margin <- rep(margin, length.out = 4)
@@ -222,7 +224,7 @@ make_inner_box <- function(text, halign, valign, use_markdown, gp) {
   if (use_markdown) {
     text <- markdown::markdownToHTML(text = text, options = c("use_xhtml", "fragment_only"))
   }
-  doctree <- read_html(text)
+  doctree <- read_html(paste0("<!DOCTYPE html>", text))
 
   drawing_context <- setup_context(gp = gp, halign = halign, word_wrap = FALSE)
   boxlist <- process_tags(xml2::as_list(doctree)$html$body, drawing_context)
