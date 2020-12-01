@@ -1,4 +1,4 @@
-context("textbox grob")
+context("textbox-grob")
 
 test_that("misc. tests", {
   # empty strings work

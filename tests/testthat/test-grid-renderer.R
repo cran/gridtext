@@ -1,4 +1,4 @@
-context("grid renderer")
+context("grid-renderer")
 
 test_that("basic functioning", {
   r <- grid_renderer()

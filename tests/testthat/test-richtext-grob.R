@@ -1,4 +1,4 @@
-context("richtext grob")
+context("richtext-grob")
 
 test_that("grobheight and grobwidth work", {
   # width is the same for textGrob and richtext_grob
